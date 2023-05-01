@@ -1,0 +1,1 @@
+import { StyleSheet } from 'react-native';\n\nexport default StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n  text: {\n    fontSize: 20,\n    fontWeight: 'bold',\n  },\n});
