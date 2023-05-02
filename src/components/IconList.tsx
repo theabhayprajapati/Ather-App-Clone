@@ -3,7 +3,12 @@ import React from 'react';
 import { FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { FONT } from '../utils/constants';
 
-const ICONS = [
+type ICONSProps = {
+    name: string;
+    iconName: IoniconsName;
+}
+
+const ICONS: ICONSProps[] = [
     {
         name: 'Explore',
         iconName: 'search-outline',
@@ -30,19 +35,23 @@ const ICONS = [
         iconName: 'construct-outline',
     },
     {
-        name: 'Accessories',
-        iconName: 'bag-handle-outline',
-    },
-    {
         name: 'More',
         iconName: 'ellipsis-horizontal-outline',
     },
 
 ];
 
-const IconListItem = ({ name, iconName }) => {
+type IconsListItemProps = {
+    name: string;
+    iconName: string;
+};
+
+type IoniconsName = React.ComponentProps<typeof Ionicons>['name'];
+
+const IconListItem = ({ name, iconName }: IconsListItemProps) => {
     return (
         <TouchableOpacity style={styles.iconItem}>
+            {/* @ts-ignore */}
             <Ionicons name={iconName} size={18} color={'gray'} />
             <Text style={styles.iconName}>{name}</Text>
         </TouchableOpacity>
