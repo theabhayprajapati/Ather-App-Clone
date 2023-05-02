@@ -67,6 +67,8 @@ export const FONT = {
 export const COLORS = {
     primary: "#262D37",
     secondary: "#262D3799",
+    white: "#FFFFFF",
+    gray: "#F2F2F2",
 }
 
 export const flexaligncenter: ViewStyle = {

@@ -1,3 +1,4 @@
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import Maps from "./Maps/index";
@@ -23,7 +24,7 @@ type BottomTabParams = {
 
 const MainStack = createNativeStackNavigator<MainStackParams>();
 const AuthStack = createNativeStackNavigator<AuthStackParams>();
-const BottomTab = createNativeStackNavigator<BottomTabParams>();
+const BottomTab = createBottomTabNavigator<BottomTabParams>();
 
 
 export const MainStackScreen = () => {
@@ -35,7 +36,6 @@ export const MainStackScreen = () => {
             initialRouteName="BottomTab"
         >
             <MainStack.Screen name="BottomTab" component={BottomTabScreen} />
-            <MainStack.Screen name="AuthStack" component={AuthStackScreen} />
         </MainStack.Navigator>
     )
 }
@@ -46,8 +46,7 @@ export const BottomTabScreen = () => {
             screenOptions={{
                 headerShown: false
             }}
-            initialRouteName='Home'
-        >
+            initialRouteName='Maps'>
             <BottomTab.Screen name="Home" component={HomeScreen} />
             <BottomTab.Screen name="Maps" component={Maps} />
             <BottomTab.Screen name="Service" component={Service} />

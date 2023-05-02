@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Dot from "../../components/Dot";
 import { COLORS, FONT, PADDING, SECTION } from "../../utils/constants";
 type Props = {};
@@ -65,27 +65,27 @@ const HomeScreen = (props: Props) => {
                     </View>
                 </TouchableOpacity>
             </View>
-            <View style={styles.Status}>
+            <ScrollView> <View style={styles.Status}>
                 {/* status */}
                 <View>
 
                 </View>
 
             </View>
-            <View style={styles.useMaps}>
-                <View>
-                    <Text>Use Maps</Text>
-                </View>
-                {/* horizontalscroll */}
+                <View style={styles.useMaps}>
+                    <View>
+                        <Text>Use Maps</Text>
+                    </View>
+                    {/* horizontalscroll */}
 
-                {/* maps */}
-            </View>
-            <View style={styles.recentRides}>
-                {/* recent ride */}
-            </View>
-            <View style={styles.features}>
-                {/* features  */}
-            </View>
+                    {/* maps */}
+                </View>
+                <View style={styles.recentRides}>
+                    {/* recent ride */}
+                </View>
+                <View style={styles.features}>
+                    {/* features  */}
+                </View></ScrollView>
         </View>
     );
 };
