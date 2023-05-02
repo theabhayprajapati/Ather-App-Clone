@@ -1,9 +1,15 @@
-import { TextStyle } from "react-native/types";
+import { ViewStyle } from "react-native/types";
 
 export const BUTTON_HEIGHT = 50;
 
 export const PADDING = {
     primary: 20,
+}
+export const MARGIN = {
+    primary: 20,
+}
+export const SECTION: ViewStyle = {
+    marginTop: 20,
 }
 export const FONTS = {
     "PlusJakartaSans-Light": require("../assets/fonts/Plus_Jakarta_Sans/static/Light.ttf"),
@@ -24,9 +30,48 @@ export const FONTS = {
 
 // type of stylesheet
 
+export const FONT_FAMILY = {
+    regular: "PlusJakartaSans-Regular",
+    medium: "PlusJakartaSans-Medium",
+    semiBold: "PlusJakartaSans-SemiBold",
+    bold: "PlusJakartaSans-Bold",
+    extraBold: "PlusJakartaSans-ExtraBold",
+    light: "PlusJakartaSans-Light",
+    extraLight: "PlusJakartaSans-ExtraLight",
+    italic: "PlusJakartaSans-Italic",
+    lightItalic: "PlusJakartaSans-LightItalic",
+    mediumItalic: "PlusJakartaSans-MediumItalic",
+    semiBoldItalic: "PlusJakartaSans-SemiBoldItalic",
+    boldItalic: "PlusJakartaSans-BoldItalic",
+    extraBoldItalic: "PlusJakartaSans-ExtraBoldItalic",
+    extraLightItalic: "PlusJakartaSans-ExtraLightItalic",
+};
 
-type fontStyles = TextStyle
+export const FONT = {
+    regular: { fontFamily: FONT_FAMILY.regular },
+    medium: { fontFamily: FONT_FAMILY.medium },
+    semiBold: { fontFamily: FONT_FAMILY.semiBold },
+    bold: { fontFamily: FONT_FAMILY.bold },
+    extraBold: { fontFamily: FONT_FAMILY.extraBold },
+    light: { fontFamily: FONT_FAMILY.light },
+    extraLight: { fontFamily: FONT_FAMILY.extraLight },
+    italic: { fontFamily: FONT_FAMILY.italic },
+    lightItalic: { fontFamily: FONT_FAMILY.lightItalic },
+    mediumItalic: { fontFamily: FONT_FAMILY.mediumItalic },
+    semiBoldItalic: { fontFamily: FONT_FAMILY.semiBoldItalic },
+    boldItalic: { fontFamily: FONT_FAMILY.boldItalic },
+    extraBoldItalic: { fontFamily: FONT_FAMILY.extraBoldItalic },
+    extraLightItalic: { fontFamily: FONT_FAMILY.extraLightItalic },
+};
 
-export const REGULARFONT: fontStyles = {
-    fontFamily: "PlusJakartaSans-Regular",
+export const COLORS = {
+    primary: "#262D37",
+    secondary: "#262D3799",
 }
+
+export const flexaligncenter: ViewStyle = {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+}
+
