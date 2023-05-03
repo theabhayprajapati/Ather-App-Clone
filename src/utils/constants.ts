@@ -6,6 +6,7 @@ export const PADDING = {
     primary: 20,
     secondary: 40,
     small: 10,
+    medium: 16,
 }
 export const MARGIN = {
     primary: 20,

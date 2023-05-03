@@ -1,12 +1,19 @@
-import { Feather, FontAwesome5, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+    Entypo,
+    Feather,
+    FontAwesome5,
+    Ionicons,
+    MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import React from "react";
 import {
     FlatList,
+    Image,
     ScrollView,
     StyleSheet,
     Text,
     TouchableOpacity,
-    View,
+    View
 } from "react-native";
 import Dot from "../../components/Dot";
 import { H4 } from "../../components/Typography";
@@ -29,7 +36,7 @@ const MAPS_ITEMS = [
     },
     {
         title: "Find a Charger",
-        icon: <MaterialCommunityIcons name="cable-data" size={24} color="black" />
+        icon: <MaterialCommunityIcons name="cable-data" size={24} color="black" />,
     },
 ];
 
@@ -57,7 +64,6 @@ const HomeScreen = (props: Props) => {
                                     fontSize: 28,
                                     color: "#262D37",
                                     lineHeight: 35,
-                                    fontWeight: "bold",
                                     fontStyle: "normal",
                                 }}
                             >
@@ -77,6 +83,7 @@ const HomeScreen = (props: Props) => {
                             fontSize: 12,
                             lineHeight: 15,
                             color: "#262D3799",
+                            marginTop: 4,
                         }}
                     >
                         Last synced 1 min ago
@@ -98,8 +105,133 @@ const HomeScreen = (props: Props) => {
                 style={{ flex: 1, paddingBottom: 80 }}
             >
                 <View style={styles.Status}>
-                    {/* status */}
-                    <View></View>
+                    <View
+                        style={{
+                            position: "relative",
+                            height: 151,
+                            borderRadius: 10,
+                            flexDirection: "row",
+                            width: "100%",
+                        }}
+                    >
+                        <BatteryStatus percentage={50} />
+                        <View
+                            style={{
+                                padding: PADDING.medium,
+                                flexDirection: "column",
+                                justifyContent: "space-between",
+                                height: 151,
+                                width: "50%",
+                            }}
+                        >
+                            <Text
+                                style={{
+                                    ...FONT.medium,
+                                    fontSize: 28,
+                                    color: "#2C333D",
+                                }}
+                            >
+                                31 km
+                            </Text>
+                            <View style={{ flexDirection: "row", width: "100%" }}>
+                                <View
+                                    style={{
+                                        width: "50%",
+                                        flexDirection: "column",
+                                        justifyContent: "space-between",
+                                    }}
+                                >
+                                    <Text
+                                        style={{
+                                            color: "#262D37",
+                                            ...FONT.regular,
+                                            fontSize: 12,
+                                            lineHeight: 15,
+                                        }}
+                                    >
+                                        20 KM
+                                    </Text>{" "}
+                                    <Text
+                                        style={{
+                                            color: "#262D37",
+                                            ...FONT.regular,
+                                            fontSize: 12,
+                                            lineHeight: 15,
+                                        }}
+                                    >
+                                        30 min
+                                    </Text>
+                                </View>
+                                <View
+                                    style={{
+                                        width: "50%",
+                                        flexDirection: "column",
+                                        justifyContent: "space-between",
+                                    }}
+                                >
+                                    <Text
+                                        style={{
+                                            color: "#262D37",
+                                            ...FONT.regular,
+                                            fontSize: 12,
+                                            lineHeight: 15,
+                                        }}
+                                    >
+                                        2 hr 09 min
+                                    </Text>{" "}
+                                    <Text
+                                        style={{
+                                            color: "#262D37",
+                                            ...FONT.regular,
+                                            fontSize: 12,
+                                            lineHeight: 15,
+                                        }}
+                                    >
+                                        80%
+                                    </Text>
+                                </View>
+                            </View>
+                            <Text
+                                style={{
+                                    color: "#262D37",
+                                    ...FONT.bold,
+                                    fontSize: 14,
+                                    lineHeight: 17,
+                                }}
+                            >
+                                Charging Now
+                            </Text>
+                        </View>
+
+                        <TouchableOpacity
+                            style={{
+                                position: "absolute",
+                                top: 0,
+                                right: 0,
+                                flexDirection: "row",
+                                backgroundColor: hexWithOpacity(COLORS.secondary, 0.1),
+                                borderRadius: 10,
+                                padding: PADDING.primary,
+                                justifyContent: "center",
+                                alignItems: "center",
+                                gap: 10,
+                            }}
+                        >
+                            <Entypo name="battery" size={24} color={COLORS.secondary} />
+                            <Text>69%</Text>
+                        </TouchableOpacity>
+                        {/* image ./assets/image/asdf.png */}
+                        <Image
+                            source={require("../../assets/images/scooter.png")}
+                            style={{
+                                backgroundColor: "red",
+                                borderColor: 'red',
+                                borderWidth: 1,
+                                position: "absolute",
+                            }}
+                        />
+
+                    </View>
                 </View>
                 <View style={styles.useMaps}>
                     <H4>Use Maps to</H4>
@@ -111,10 +243,19 @@ const HomeScreen = (props: Props) => {
                             renderItem={({ item }) => (
                                 <TouchableOpacity style={styles.mapsItem}>
                                     {item.icon}
-                                    <Text>{item.title}</Text>
+                                    <Text
+                                        style={{
+                                            ...FONT.medium,
+                                            fontSize: 12,
+                                            lineHeight: 15,
+                                            color: "#262D3799",
+                                            marginTop: 4,
+                                        }}
+
+                                    >{item.title}</Text>
                                 </TouchableOpacity>
                             )}
-                            style={{ paddingVertical: 10 }}
+                            style={{ marginTop: MARGIN.primary }}
                             keyExtractor={(item, index) => index.toString()}
                             horizontal
                             showsHorizontalScrollIndicator={false}
@@ -128,27 +269,20 @@ const HomeScreen = (props: Props) => {
                         {/* horixonal flat list */}
                         <FlatList
                             data={RIDES}
-                            renderItem={({ item }) => (
-                                <RidesDetail {...item} />
-                            )}
-                            style={{ paddingVertical: 10 }}
+                            renderItem={({ item }) => <RidesDetail {...item} />}
+                            style={{ marginTop: MARGIN.primary }}
                             keyExtractor={(item, index) => index.toString()}
                             horizontal
                             showsHorizontalScrollIndicator={false}
                         />
-
                     </View>
                 </View>
                 <View style={styles.features}>
-                    <H4>
-                        Features
-                    </H4>
+                    <H4>Features</H4>
                     <View>
                         <FlatList
                             data={FEATURES}
-                            renderItem={({ item }) => (
-                                <Feature {...item} />
-                            )}
+                            renderItem={({ item }) => <Feature {...item} />}
                             style={{ paddingVertical: 10 }}
                             showsVerticalScrollIndicator={false}
                             keyExtractor={(item, index) => index.toString()}
@@ -170,14 +304,13 @@ const styles = StyleSheet.create({
     Status: {
         ...SECTION,
         position: "relative",
-        borderWidth: 1,
-        height: 200,
-        backgroundColor: "green",
+        height: 151,
+        backgroundColor: "#80FF8A40",
         borderRadius: 10,
+        marginBottom: 50,
     },
     useMaps: {
         ...SECTION,
-
     },
     recentRides: {
         ...SECTION,
@@ -200,9 +333,9 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: '#FFFFFF',
+        backgroundColor: "#FFFFFF",
         elevation: 5,
-        shadowColor: 'rgba(91, 112, 140, 0.2)',
+        shadowColor: "rgba(91, 112, 140, 0.2)",
         shadowOffset: { width: 0, height: 5 },
         shadowOpacity: 1,
         shadowRadius: 15,
@@ -210,112 +343,115 @@ const styles = StyleSheet.create({
     },
 });
 
+type BatteryStatusProps = {
+    percentage: number;
+};
 
-
-
+const BatteryStatus = ({ percentage }: BatteryStatusProps) => {
+    return (
+        <View
+            style={{
+                position: "absolute",
+                height: 151,
+                width: `${percentage}%`,
+                backgroundColor: "#80FF8A",
+                borderRadius: 10,
+            }}
+        />
+    );
+};
 
 type RideDetailProps = {
     Efficiency: {
         value: number;
-        name: 'Efficiency';
-        metric: 'Wh/km';
+        name: "Efficiency";
+        metric: "Wh/km";
     };
     Duration: {
         value: number;
-        name: 'Duration';
-        metric: 'min';
+        name: "Duration";
+        metric: "min";
     };
     TopSpeed: {
         value: number;
-        name: 'Top Speed';
-        metric: 'km/h';
+        name: "Top Speed";
+        metric: "km/h";
     };
 };
-
-
-
 
 const RIDES: RideDetailProps[] = [
     {
         Efficiency: {
             value: 4.5,
-            name: 'Efficiency',
-            metric: 'Wh/km',
+            name: "Efficiency",
+            metric: "Wh/km",
         },
         Duration: {
             value: 50,
-            name: 'Duration',
-            metric: 'min',
+            name: "Duration",
+            metric: "min",
         },
         TopSpeed: {
             value: 80,
-            name: 'Top Speed',
-            metric: 'km/h',
+            name: "Top Speed",
+            metric: "km/h",
         },
-    }, {
+    },
+    {
         Efficiency: {
             value: 4.5,
-            name: 'Efficiency',
-            metric: 'Wh/km',
+            name: "Efficiency",
+            metric: "Wh/km",
         },
         Duration: {
             value: 50,
-            name: 'Duration',
-            metric: 'min',
+            name: "Duration",
+            metric: "min",
         },
         TopSpeed: {
             value: 80,
-            name: 'Top Speed',
-            metric: 'km/h',
+            name: "Top Speed",
+            metric: "km/h",
         },
-    }
-    , {
+    },
+    {
         Efficiency: {
             value: 4.5,
-            name: 'Efficiency',
-            metric: 'Wh/km',
+            name: "Efficiency",
+            metric: "Wh/km",
         },
         Duration: {
             value: 50,
-            name: 'Duration',
-            metric: 'min',
+            name: "Duration",
+            metric: "min",
         },
         TopSpeed: {
             value: 80,
-            name: 'Top Speed',
-            metric: 'km/h',
+            name: "Top Speed",
+            metric: "km/h",
         },
-    }]
-
-
+    },
+];
 
 const RidesDetail = (props: RideDetailProps) => {
-
     return (
         <View style={RidesDetailStyles.container}>
             <View style={RidesDetailStyles.time}>
-                <Text
-                    style={RidesDetailStyles.timeText}
-                >50 min ago</Text>
+                <Text style={RidesDetailStyles.timeText}>50 min ago</Text>
             </View>
             <View style={RidesDetailStyles.item}>
                 <Text style={RidesDetailStyles.info}>Efficiency</Text>
-                <Text style={
-                    RidesDetailStyles.text
-                }>4.5</Text>
+                <Text style={RidesDetailStyles.text}>4.5</Text>
                 <Text style={RidesDetailStyles.info}>Wh/km</Text>
             </View>
             <View style={RidesDetailStyles.item}>
                 <Text style={RidesDetailStyles.info}>Efficiency</Text>
-                <Text style={
-                    RidesDetailStyles.text
-                }>4.5</Text>
+                <Text style={RidesDetailStyles.text}>4.5</Text>
                 <Text style={RidesDetailStyles.info}>Wh/km</Text>
-            </View><View style={RidesDetailStyles.item}>
+            </View>
+            <View style={RidesDetailStyles.item}>
                 <Text style={RidesDetailStyles.info}>Efficiency</Text>
-                <Text style={
-                    RidesDetailStyles.text
-                }>4.5</Text>
+                <Text style={RidesDetailStyles.text}>4.5</Text>
                 <Text style={RidesDetailStyles.info}>Wh/km</Text>
             </View>
         </View>
@@ -323,18 +459,18 @@ const RidesDetail = (props: RideDetailProps) => {
 };
 const RidesDetailStyles = StyleSheet.create({
     container: {
-        position: 'relative',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+        position: "relative",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
         padding: PADDING.primary,
         borderRadius: 10,
         height: 100,
         // 0px 5px 15px rgba(91, 112, 140, 0.2)
-        backgroundColor: '#FFFFFF',
+        backgroundColor: "#FFFFFF",
 
         elevation: 5,
-        shadowColor: 'rgba(91, 112, 140, 0.2)',
+        shadowColor: "rgba(91, 112, 140, 0.2)",
         shadowOffset: { width: 0, height: 5 },
         shadowOpacity: 1,
         shadowRadius: 15,
@@ -342,10 +478,10 @@ const RidesDetailStyles = StyleSheet.create({
         marginRight: PADDING.small,
     },
     time: {
-        position: 'absolute',
+        position: "absolute",
         top: 0,
         right: 0,
-        backgroundColor: hexWithOpacity('#1E4B8A', 20),
+        backgroundColor: hexWithOpacity("#1E4B8A", 20),
         paddingLeft: PADDING.small,
         padding: 2,
         borderBottomLeftRadius: 10,
@@ -355,115 +491,106 @@ const RidesDetailStyles = StyleSheet.create({
         ...FONT.semiBold,
         fontSize: 10,
         lineHeight: 15,
-        color: '#2C333D',
+        color: "#2C333D",
     },
     item: {
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        alignItems: 'flex-start',
+        flexDirection: "column",
+        justifyContent: "space-between",
+        alignItems: "flex-start",
     },
     info: {
         fontSize: 12,
         lineHeight: 18,
-        color: '#262D37CC',
+        color: "#262D37CC",
         ...FONT.medium,
     },
     text: {
         fontSize: 16,
         lineHeight: 20,
-        color: '#262D37',
+        color: "#262D37",
         ...FONT.bold,
-
-    }
+    },
 });
 
-
-
-
 type FeatureProps = {
-    title: string,
-    desc: string,
-    onPress: () => void,
-    buttonText: string,
-    icon: React.ReactNode,
-    backgroundColor?: string,
-}
+    title: string;
+    desc: string;
+    onPress: () => void;
+    buttonText: string;
+    icon: React.ReactNode;
+    backgroundColor?: string;
+};
 
 const FEATURES: FeatureProps[] = [
-
-
     {
-
-        title: 'Ather Labs',
-        desc: 'Try the Latest New Features',
+        title: "Ather Labs",
+        desc: "Try the Latest New Features",
         onPress: () => { },
-        buttonText: 'Explore Now',
+        buttonText: "Explore Now",
         icon: <Feather name="arrow-up-right" size={15} color="black" />,
-        backgroundColor: 'lightblue'
-
-    }
-    , {
+        backgroundColor: "lightblue",
+    },
+    {
         icon: <FontAwesome5 name="angle-right" size={15} color="black" />,
-        title: 'Savings Tracker',
-        desc: 'Track your savings and reduced carbon emissions',
+        title: "Savings Tracker",
+        desc: "Track your savings and reduced carbon emissions",
         onPress: () => { },
-        buttonText: 'View now',
-        backgroundColor: 'lightgreen'
+        buttonText: "View now",
+        backgroundColor: "lightgreen",
+    },
+];
 
-    }
-]
-
-const Feature = ({ title, desc, onPress, buttonText, icon, backgroundColor }: FeatureProps) => {
+const Feature = ({
+    title,
+    desc,
+    onPress,
+    buttonText,
+    icon,
+    backgroundColor,
+}: FeatureProps) => {
     return (
         <View style={[featuresStyles.container, { backgroundColor }]}>
             <View>
-                <Text style={featuresStyles.buttonText}>
-                    {title}
-                </Text>
-                <Text>
-                    {desc}
-                </Text>
+                <Text style={featuresStyles.buttonText}>{title}</Text>
+                <Text>{desc}</Text>
             </View>
             <TouchableOpacity style={featuresStyles.button}>
-                <Text style={featuresStyles.buttonText}>
-                    {buttonText}
-                </Text>
-                <View>
-                    {icon}
-                </View>
+                <Text style={featuresStyles.buttonText}>{buttonText}</Text>
+                <View>{icon}</View>
             </TouchableOpacity>
         </View>
-    )
-}
+    );
+};
 
 const featuresStyles = StyleSheet.create({
     container: {
         height: 112,
         padding: PADDING.primary,
-        justifyContent: 'space-between',
+        justifyContent: "space-between",
         marginTop: MARGIN.primary,
         borderRadius: 10,
-        shadowColor: 'rgba(91, 112, 140, 0.2)',
+        shadowColor: "rgba(91, 112, 140, 0.2)",
         shadowOffset: { width: 0, height: 5 },
         shadowOpacity: 1,
         shadowRadius: 15,
         marginRight: PADDING.small,
-    }, desc: {
+    },
+    desc: {
         ...FONT.medium,
         fontSize: 14,
         lineHeight: 18,
-        color: 'rgba(38, 45, 55, 0.8)',
+        color: "rgba(38, 45, 55, 0.8)",
     },
     button: {
         marginTop: PADDING.small,
-        flexDirection: 'row',
-        alignItems: 'center',
+        flexDirection: "row",
+        alignItems: "center",
         gap: PADDING.small,
     },
     buttonText: {
         ...FONT.bold,
         fontSize: 14,
         lineHeight: 18,
-        color: '#262D37',
-    }
-})
+        color: "#262D37",
+    },
+});
