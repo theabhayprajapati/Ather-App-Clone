@@ -124,10 +124,9 @@ type QuickLinkProps = {
   name: string;
 }
 
-const QuickLinks = ({ name }: QuickLinkProps) => {
+export const QuickLinks = ({ name }: QuickLinkProps) => {
   return (
     <TouchableOpacity style={QuickLinkstyle.container}>
-
       <Text style={QuickLinkstyle.name}>
         {name}
       </Text>

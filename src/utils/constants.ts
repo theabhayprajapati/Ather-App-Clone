@@ -75,6 +75,7 @@ export const COLORS = {
     tabBar: "rgba(38, 45, 55, 0.9)",
     tabBarActive: "#ffffff",
     tabBarInactive: "#8D99B0",
+    title: '#2C333D'
 }
 
 export const flexaligncenter: ViewStyle = {
