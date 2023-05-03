@@ -7,6 +7,7 @@ export const PADDING = {
 }
 export const MARGIN = {
     primary: 20,
+    secondary: 40,
 }
 export const SECTION: ViewStyle = {
     marginTop: 20,
@@ -69,6 +70,11 @@ export const COLORS = {
     secondary: "#262D3799",
     white: "#FFFFFF",
     gray: "#F2F2F2",
+    blue: "#1E4B8A",
+    lightgray: '#E9EDF3',
+    tabBar: "rgba(38, 45, 55, 0.9)",
+    tabBarActive: "#ffffff",
+    tabBarInactive: "#8D99B0",
 }
 
 export const flexaligncenter: ViewStyle = {

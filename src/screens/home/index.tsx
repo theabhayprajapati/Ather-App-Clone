@@ -65,13 +65,14 @@ const HomeScreen = (props: Props) => {
                     </View>
                 </TouchableOpacity>
             </View>
-            <ScrollView> <View style={styles.Status}>
-                {/* status */}
-                <View>
+            <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1, borderWidth: 1 }}>
+                <View style={styles.Status}>
+                    {/* status */}
+                    <View>
+
+                    </View>
 
                 </View>
-
-            </View>
                 <View style={styles.useMaps}>
                     <View>
                         <Text>Use Maps</Text>
@@ -85,7 +86,12 @@ const HomeScreen = (props: Props) => {
                 </View>
                 <View style={styles.features}>
                     {/* features  */}
-                </View></ScrollView>
+                </View><View style={styles.features}>
+                    {/* features  */}
+                </View><View style={styles.features}>
+                    {/* features  */}
+                </View>
+            </ScrollView>
         </View>
     );
 };
@@ -96,6 +102,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: PADDING.primary,
+        paddingBottom: 0,
     },
     Status: {
         ...SECTION,

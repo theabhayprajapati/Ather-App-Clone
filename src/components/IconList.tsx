@@ -1,7 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { FONT } from '../utils/constants';
+import { COLORS, FONT, MARGIN } from '../utils/constants';
+import { hexWithOpacity } from '../utils/helpers';
 
 type ICONSProps = {
     name: string;
@@ -65,6 +66,9 @@ const IconList = () => {
             renderItem={({ item }) => <IconListItem name={item.name} iconName={item.iconName} />}
             keyExtractor={(item) => item.name}
             horizontal
+            style={{
+                marginTop: MARGIN.primary,
+            }}
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.iconList}
         />
