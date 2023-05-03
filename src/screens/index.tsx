@@ -25,23 +25,23 @@ const INTITAIL_ROUTES: INITAIL_ROUTES_t = {
     ProfileScreenStack: "Profile",
 };
 
-type MainStackParams = {
+export type MainStackParams = {
     BottomTab: undefined;
     AuthStack: undefined;
 };
 
-type AuthStackParams = {
+export type AuthStackParams = {
     Login: undefined;
     Register: undefined;
 };
-type BottomTabParams = {
+export type BottomTabParams = {
     Home: undefined;
     Maps: undefined;
     Service: undefined;
     Profile: undefined;
 };
 
-type ProfileScreenStackParams = {
+export type ProfileScreenStackParams = {
     Profile: undefined;
     Settings: undefined;
 };

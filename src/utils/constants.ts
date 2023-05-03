@@ -4,6 +4,8 @@ export const BUTTON_HEIGHT = 50;
 
 export const PADDING = {
     primary: 20,
+    secondary: 40,
+    small: 10,
 }
 export const MARGIN = {
     primary: 20,

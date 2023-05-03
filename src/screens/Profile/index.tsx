@@ -1,7 +1,8 @@
 import { Entypo, EvilIcons, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React from "react";
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ProfileScreenStackParams } from "..";
 import { COLORS, FONT, PADDING } from "../../utils/constants";
 import { hexWithOpacity } from "../../utils/helpers";
 
@@ -147,11 +148,11 @@ type QuickLinkProps = {
 }
 
 export const QuickLinks = ({ name, icon, moveTo }: QuickLinkProps) => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<NavigationProp<ProfileScreenStackParams>>();
     return (
         <TouchableOpacity style={QuickLinkstyle.container}
             onPress={
-                () => navigation.push('Settings')
+                () => navigation.navigate("Settings")
             }>
             <View style={QuickLinkstyle.icon}>
                 {icon}
