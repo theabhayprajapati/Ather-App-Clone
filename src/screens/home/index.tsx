@@ -1,12 +1,13 @@
 import {
     AntDesign,
     Entypo,
+    EvilIcons,
     Feather,
     FontAwesome5,
     Ionicons,
     MaterialCommunityIcons,
 } from "@expo/vector-icons";
-import { BottomSheet } from '@rneui/themed';
+import { BottomSheet } from "@rneui/themed";
 import React, { useState } from "react";
 import {
     FlatList,
@@ -15,7 +16,7 @@ import {
     StyleSheet,
     Text,
     TouchableOpacity,
-    View
+    View,
 } from "react-native";
 import BatteryIcon from "../../components/BatteryIcon";
 import Dot from "../../components/Dot";
@@ -43,21 +44,10 @@ const MAPS_ITEMS = [
     },
 ];
 
-
-
 const HomeScreen = (props: Props) => {
-
-    const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(true)
-    const list = [
-        { title: 'List Item 1' },
-        { title: 'List Item 2' },
-        {
-            title: 'Cancel',
-            containerStyle: { backgroundColor: 'red' },
-            titleStyle: { color: 'white' },
-            onPress: () => setIsBottomSheetOpen(false),
-        },
-    ];
+    const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
+    const [isBottomSheetOpen2, setIsBottomSheetOpen2] = useState(true);
+    const [isBottomSheetOpen3, setIsBottomSheetOpen3] = useState(false);
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -106,7 +96,7 @@ const HomeScreen = (props: Props) => {
                         Last synced 1 min ago
                     </Text>
                 </View>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => setIsBottomSheetOpen2(true)}>
                     <View style={{ position: "relative" }}>
                         <Ionicons
                             name="notifications-outline"
@@ -237,8 +227,6 @@ const HomeScreen = (props: Props) => {
                             <Entypo name="battery" size={24} color={COLORS.secondary} />
                             <Text>69%</Text>
                         </TouchableOpacity>
-
-
                     </View>
                     <View
                         style={{
@@ -247,7 +235,10 @@ const HomeScreen = (props: Props) => {
                             right: 0,
                         }}
                     >
-                        <Image source={require('../../assets/images/scooter.png')} style={{ height: 60+50, width: 95+70, borderRadius: 10 }} />
+                        <Image
+                            source={require("../../assets/images/scooter.png")}
+                            style={{ height: 60 + 50, width: 95 + 70, borderRadius: 10 }}
+                        />
                     </View>
                 </View>
                 <View style={styles.useMaps}>
@@ -258,7 +249,10 @@ const HomeScreen = (props: Props) => {
                         <FlatList
                             data={MAPS_ITEMS}
                             renderItem={({ item }) => (
-                                <TouchableOpacity style={styles.mapsItem}>
+                                <TouchableOpacity
+                                    onPress={() => setIsBottomSheetOpen3(true)}
+                                    style={styles.mapsItem}
+                                >
                                     {item.icon}
                                     <Text
                                         style={{
@@ -268,8 +262,9 @@ const HomeScreen = (props: Props) => {
                                             color: "#262D3799",
                                             marginTop: 4,
                                         }}
-
-                                    >{item.title}</Text>
+                                    >
+                                        {item.title}
+                                    </Text>
                                 </TouchableOpacity>
                             )}
                             style={{ marginTop: MARGIN.primary }}
@@ -307,43 +302,676 @@ const HomeScreen = (props: Props) => {
                     </View>
                 </View>
             </ScrollView>
-            <BottomSheet modalProps={{}} isVisible={isBottomSheetOpen} onBackdropPress={
-                () => {
-                    setIsBottomSheetOpen(false)
-                }
-            }>
-                <View style={{
-                    backgroundColor: 'transparent',
-                    height: 330, flexDirection: 'column',
-                    alignItems: 'center',
-                }}>
+            <BottomSheet
+                modalProps={{}}
+                isVisible={isBottomSheetOpen}
+                onBackdropPress={() => {
+                    setIsBottomSheetOpen(false);
+                }}
+            >
+                <View
+                    style={{
+                        backgroundColor: "transparent",
+                        height: 360,
+                        flexDirection: "column",
+                        alignItems: "center",
+                    }}
+                >
                     <HorizontalLine />
-                    <View style={{
-                        flexDirection: 'column',
-                        width: '100%',
-                        alignItems: 'center',
-                        marginTop: MARGIN.primary,
-                        backgroundColor: 'white',
-                        height: 270,
-                        borderRadius: 10,
-                        padding: PADDING.primary,
-                    }}>
+                    <View
+                        style={{
+                            flexDirection: "column",
+                            width: "100%",
+                            alignItems: "center",
+                            marginTop: MARGIN.primary,
+                            backgroundColor: "white",
+                            height: 300,
+                            borderRadius: 10,
+                            padding: PADDING.primary,
+                        }}
+                    >
                         <View>
-                            <H4>
-                                Select Your Scooter
-                            </H4>
+                            <H4>Select Your Scooter</H4>
                         </View>
-                        <ScrollView
-
-                            showsVerticalScrollIndicator={false}
+                        <View
                             style={{
-                                width: '100%',
+                                width: "100%",
                                 marginTop: MARGIN.primary,
-                            }}>
-
+                            }}
+                        >
                             <ActiveScooters backgroundColorS={"rgba(30, 75, 138, 0.2)"} />
                             <ActiveScooters backgroundColorS={"#ffffff"} />
-                        </ScrollView>
+                        </View>
+                    </View>
+                </View>
+            </BottomSheet>
+            <BottomSheet
+                modalProps={{}}
+                isVisible={isBottomSheetOpen2}
+                onBackdropPress={() => setIsBottomSheetOpen2(false)}
+            >
+                <View
+                    style={{
+                        height: 500,
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "space-around",
+                        padding: 0,
+                    }}
+                >
+                    <HorizontalLine />
+                    <View
+                        style={{
+                            height: "90%",
+                            width: "100%",
+                            backgroundColor: 'white'
+                        }}
+                    >
+                        <View
+                            style={{
+                                flexDirection: "column",
+                                alignItems: "flex-start",
+                                paddingVertical: PADDING.medium,
+                                paddingHorizontal: PADDING.primary,
+                                gap: PADDING.small
+                            }}
+                        >
+
+                            <H4>Your Recent Ride</H4>
+
+                            <View
+                                style={{
+                                    flexDirection: "row",
+                                    gap: PADDING.small,
+                                    alignItems: "center",
+                                    marginTop: MARGIN.small,
+                                }}
+                            >
+                                <Text
+                                    style={{
+                                        ...FONT.medium,
+                                        fontSize: 14,
+                                        lineHeight: 18,
+                                    }}
+                                >2 hr 09 min</Text>
+                                <Text
+                                    style={{
+                                        ...FONT.medium,
+                                        fontSize: 14,
+                                        lineHeight: 18,
+                                    }}
+                                >80%</Text>
+                                <Text
+                                    style={{
+                                        ...FONT.medium,
+                                        fontSize: 14,
+                                        lineHeight: 18,
+                                    }}
+                                >Charging Now</Text>
+                            </View>
+                        </View>
+                        <View
+                            style={{
+                                padding: PADDING.primary,
+                                height: "80%",
+                                width: "100%",
+                            }}
+                        >
+                            <View style={{}}>
+                                <View
+
+                                    style={{
+                                        flexDirection: "column",
+                                        alignItems: "flex-start",
+                                        padding: PADDING.medium,
+                                        gap: PADDING.small,
+                                        width: "100%",
+                                        backgroundColor: "rgba(30, 75, 138, 0.1)",
+                                        borderRadius: 10,
+                                    }}>
+                                    <View
+                                        style={{
+                                            flexDirection: "row",
+                                            alignItems: "flex-start",
+                                        }}
+                                    >
+                                        <Text
+
+                                            style={{
+                                                ...FONT.medium,
+                                                fontSize: 14,
+                                                lineHeight: 18,
+                                                color: "#0D1929",
+                                            }}
+                                        >Mode: </Text>
+                                        <Text
+
+
+
+                                            style={{
+                                                ...FONT.medium,
+                                                fontSize: 14,
+                                                lineHeight: 18,
+                                                color: 'rgba(254, 160, 0, 0.8)',
+                                            }}>
+                                            S
+                                        </Text>
+                                    </View>
+                                    <View
+                                        style={{
+                                            width: "100%",
+                                            height: 8,
+                                            backgroundColor: "rgba(254, 160, 0, 0.8)",
+                                            borderRadius: 2,
+                                        }}
+                                    />
+                                </View>
+                            </View>
+                            <View
+                                style={{
+                                    marginTop: MARGIN.small
+                                }}
+                            >
+                                <View>
+                                    <Text
+                                        style={{
+                                            ...FONT.medium,
+                                            fontSize: 14,
+                                            lineHeight: 18,
+                                            color: "#1E4B8A",
+                                        }}
+                                    >Travel history</Text>
+                                </View>
+                                <View
+                                    style={{
+                                        flexDirection: 'column',
+                                        alignItems: 'flex-start',
+                                    }}
+                                >
+                                    <View
+                                        style={{
+                                            flexDirection: 'row',
+                                            alignItems: 'center',
+                                            justifyContent: 'flex-start',
+                                            gap: PADDING.small,
+                                        }}
+                                    >
+                                        <View>
+                                            <Ionicons name="navigate-outline" size={24} color="#1E4B8A" />
+                                        </View>
+                                        <Text
+
+                                            style={{
+                                                ...FONT.regular,
+                                                fontSize: 14,
+                                                lineHeight: 18,
+                                                color: "#1E4B8A",
+                                            }}
+                                        >
+                                            1st main, 2nd cross, 2nd block Vijayanagar Bangalore.......
+                                        </Text>
+
+                                    </View>
+                                    {/* vertical line */}
+                                    <View
+                                        style={{
+                                            width: 2,
+                                            marginHorizontal: PADDING.small,
+                                            height: 15,
+                                            backgroundColor: "#1E4B8A",
+                                        }}
+                                    />
+
+                                    <View
+                                        style={{
+                                            flexDirection: 'row',
+                                            alignItems: 'center',
+                                            justifyContent: 'flex-start',
+                                            gap: PADDING.small,
+                                        }}
+
+                                    >
+                                        <View>
+                                            <EvilIcons name="location" size={24} color="#1E4B8A" />
+                                        </View>
+                                        <Text
+
+                                            style={{
+                                                ...FONT.regular,
+                                                fontSize: 14,
+                                                lineHeight: 18,
+                                                color: "#1E4B8A",
+                                            }}
+                                        >
+                                            1st main, 2nd cross, 2nd block Vijayanagar Bangalore.......
+                                        </Text>
+                                    </View>
+
+                                </View>
+                            </View>
+                            <View
+                                style={{
+                                    flexDirection: "column",
+                                    alignItems: "flex-start",
+                                    padding: PADDING.medium,
+                                    gap: PADDING.small,
+                                    width: "100%",
+                                    backgroundColor: "rgba(30, 75, 138, 0.1)",
+                                    borderRadius: 10,
+                                    marginTop: MARGIN.small,
+                                }}
+
+                            >
+                                <View>
+                                    <Text
+                                        style={{
+                                            ...FONT.medium,
+                                            fontSize: 14,
+                                            lineHeight: 18,
+                                            color: "#0D1929",
+                                        }}
+                                    >Ride Statistics</Text>
+                                </View>
+                                <View
+
+                                    style={{
+                                        flexDirection: "column",
+                                        alignItems: "flex-start",
+                                        padding: 0,
+                                        width: "100%",
+                                    }}
+                                >
+
+                                    <View
+
+                                        style={{
+                                            flexDirection: "row",
+                                            justifyContent: "space-between",
+                                            alignItems: "center",
+                                            padding: 0,
+                                            gap: PADDING.medium,
+                                            width: "100%",
+                                            borderBottomColor: "rgba(38, 45, 55, 0.1)",
+                                            paddingVertical: PADDING.small,
+                                            borderBottomWidth: 1,
+                                        }}
+                                    >
+                                        <View>
+                                            <Text
+                                                style={{
+                                                    ...FONT.medium,
+                                                    fontSize: 14,
+                                                    lineHeight: 18,
+                                                    color: "rgba(38, 45, 55, 0.8)",
+
+                                                }}
+                                            >
+                                                Efficiency
+                                            </Text>
+                                        </View>
+                                        <View
+                                            style={{
+                                                flexDirection: 'row',
+                                            }}
+                                        >
+                                            <Text
+                                                style={{
+                                                    ...FONT.medium,
+                                                    fontSize: 14,
+                                                    lineHeight: 18,
+                                                    color: "#0D1929",
+                                                }}
+                                            >
+                                                4.5
+                                            </Text>
+                                            <Text style={{
+                                                ...FONT.medium,
+                                                fontSize: 14,
+                                                lineHeight: 18,
+                                                color: "rgba(38, 45, 55, 0.8)",
+                                            }}
+                                            >
+                                                Wh/km
+                                            </Text>
+
+                                        </View>
+                                    </View>
+                                    <View
+
+                                        style={{
+                                            flexDirection: "row",
+                                            justifyContent: "space-between",
+                                            paddingVertical: PADDING.small,
+                                            alignItems: "center",
+                                            padding: 0,
+                                            width: "100%",
+                                            gap: PADDING.medium,
+                                            borderBottomColor: "rgba(38, 45, 55, 0.1)",
+                                            borderBottomWidth: 1,
+                                        }}
+                                    >
+                                        <View>
+                                            <Text
+                                                style={{
+                                                    ...FONT.medium,
+                                                    fontSize: 14,
+                                                    lineHeight: 18,
+                                                    color: "rgba(38, 45, 55, 0.8)",
+
+                                                }}
+                                            >
+                                                Efficiency
+                                            </Text>
+                                        </View>
+                                        <View
+                                            style={{
+                                                flexDirection: 'row',
+                                            }}
+                                        >
+                                            <Text
+                                                style={{
+                                                    ...FONT.medium,
+                                                    fontSize: 14,
+                                                    lineHeight: 18,
+                                                    color: "#0D1929",
+                                                }}
+                                            >
+                                                4.5
+                                            </Text>
+                                            <Text style={{
+                                                ...FONT.medium,
+                                                fontSize: 14,
+                                                lineHeight: 18,
+                                                color: "rgba(38, 45, 55, 0.8)",
+                                            }}
+                                            >
+                                                Wh/km
+                                            </Text>
+
+                                        </View>
+                                    </View>
+                                    <View
+
+                                        style={{
+                                            flexDirection: "row",
+                                            justifyContent: "space-between",
+                                            alignItems: "center",
+                                            padding: 0,
+                                            width: "100%",
+                                            gap: PADDING.medium,
+                                            borderBottomColor: "rgba(38, 45, 55, 0.1)",
+                                            borderBottomWidth: 1,
+                                            paddingVertical: PADDING.small,
+                                        }}
+                                    >
+                                        <View>
+                                            <Text
+                                                style={{
+                                                    ...FONT.medium,
+                                                    fontSize: 14,
+                                                    lineHeight: 18,
+                                                    color: "rgba(38, 45, 55, 0.8)",
+
+                                                }}
+                                            >
+                                                Efficiency
+                                            </Text>
+                                        </View>
+                                        <View
+                                            style={{
+                                                flexDirection: 'row',
+                                            }}
+                                        >
+                                            <Text
+                                                style={{
+                                                    ...FONT.medium,
+                                                    fontSize: 14,
+                                                    lineHeight: 18,
+                                                    color: "#0D1929",
+                                                }}
+                                            >
+                                                4.5
+                                            </Text>
+                                            <Text style={{
+                                                ...FONT.medium,
+                                                fontSize: 14,
+                                                lineHeight: 18,
+                                                color: "rgba(38, 45, 55, 0.8)",
+                                            }}
+                                            >
+                                                Wh/km
+                                            </Text>
+
+                                        </View>
+                                    </View>
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                </View>
+            </BottomSheet>
+            <BottomSheet
+                modalProps={{}}
+                isVisible={isBottomSheetOpen3}
+                onBackdropPress={() => setIsBottomSheetOpen3(false)}
+            >
+                <View
+                    style={{
+                        height: 500,
+                        flexDirection: "column",
+                        borderWidth: 1,
+                        padding: 0,
+                        alignItems: 'center',
+                        gap: PADDING.small,
+                    }}
+                >
+                    <HorizontalLine />
+                    <View
+                        style={{
+                            backgroundColor: "white",
+                            borderTopLeftRadius: 20,
+                            borderTopRightRadius: 20,
+                        }}
+                    >
+                        <View
+                            style={{
+                                paddingHorizontal: PADDING.primary,
+                                paddingVertical: PADDING.medium,
+                            }}
+                        >
+                            <H4>Set Remote Charging limit</H4>
+
+                            <Text
+                                style={{
+                                    ...FONT.regular,
+                                    fontSize: 14,
+                                    lineHeight: 18,
+                                    color: "rgba(38, 45, 55, 0.7)",
+                                }}
+                            >
+                                Once your Vehicle is charged to the set limit it will unlock itself from the charger at public charging points
+                            </Text>
+                        </View>
+                        <View
+                            style={{
+                                paddingHorizontal: PADDING.primary,
+                                paddingVertical: PADDING.medium,
+                                flexDirection: "column",
+                                gap: PADDING.medium,
+                            }}
+                        >
+                            <TouchableOpacity
+                                style={{
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    padding: PADDING.primary,
+                                    gap: PADDING.small,
+                                    height: 96,
+                                    backgroundColor: "rgba(30, 75, 138, 0.1)",
+                                    borderRadius: 10,
+                                }}
+                            >
+                                <View>
+                                    <FontAwesome5 name="circle" size={24} color="black" />
+                                </View>
+                                <View
+                                    style={{
+                                        flexDirection: "row",
+                                        alignItems: "center",
+                                        padding: 0,
+                                        gap: 10,
+                                    }}
+                                >
+
+                                    <Text
+                                        style={{
+                                            ...FONT.bold,
+                                            fontSize: 20,
+                                            lineHeight: 24,
+                                            color: "rgba(38, 45, 55, 0.7)",
+                                        }}
+                                    >
+                                        50%
+                                    </Text>
+                                    <Text
+                                        style={{
+                                            ...FONT.bold,
+                                            fontSize: 20,
+                                            lineHeight: 24,
+                                            color: "rgba(38, 45, 55, 0.7)",
+                                        }}
+                                    >
+                                        27km
+
+                                    </Text>
+                                    <Text
+                                        style={{
+                                            ...FONT.bold,
+                                            fontSize: 20,
+                                            lineHeight: 24,
+                                            color: "rgba(38, 45, 55, 0.7)",
+                                        }}
+                                    >
+                                        25 mins
+                                    </Text>
+
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={{
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    padding: PADDING.primary,
+                                    gap: PADDING.small,
+                                    height: 96,
+                                    backgroundColor: "rgba(30, 75, 138, 0.1)",
+                                    borderRadius: 10,
+                                }}
+                            >
+                                <View><FontAwesome5 name="dot-circle" size={24} color="black" /></View>
+                                <View
+                                    style={{
+                                        flexDirection: "row",
+                                        alignItems: "center",
+                                        padding: 0,
+                                        gap: 10,
+                                    }}
+                                >
+
+                                    <Text
+                                        style={{
+                                            ...FONT.bold,
+                                            fontSize: 20,
+                                            lineHeight: 24,
+                                            color: "rgba(38, 45, 55, 0.7)",
+                                        }}
+                                    >
+                                        50%
+                                    </Text>
+                                    <Text
+                                        style={{
+                                            ...FONT.bold,
+                                            fontSize: 20,
+                                            lineHeight: 24,
+                                            color: "rgba(38, 45, 55, 0.7)",
+                                        }}
+                                    >
+                                        27km
+
+                                    </Text>
+                                    <Text
+                                        style={{
+                                            ...FONT.bold,
+                                            fontSize: 20,
+                                            lineHeight: 24,
+                                            color: "rgba(38, 45, 55, 0.7)",
+                                        }}
+                                    >
+                                        25 mins
+                                    </Text>
+
+                                </View>
+
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={{
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    padding: PADDING.primary,
+                                    gap: PADDING.small,
+                                    height: 96,
+                                    backgroundColor: "rgba(30, 75, 138, 0.1)",
+                                    borderRadius: 10,
+                                }}
+                            >
+
+                                <View><FontAwesome5 name="dot-circle" size={24} color="black" /></View>
+                                <View
+                                    style={{
+                                        flexDirection: "row",
+                                        alignItems: "center",
+                                        padding: 0,
+                                        gap: 10,
+                                    }}
+                                >
+
+                                    <Text
+                                        style={{
+                                            ...FONT.bold,
+                                            fontSize: 20,
+                                            lineHeight: 24,
+                                            color: "rgba(38, 45, 55, 0.7)",
+                                        }}
+                                    >
+                                        50%
+                                    </Text>
+                                    <Text
+                                        style={{
+                                            ...FONT.bold,
+                                            fontSize: 20,
+                                            lineHeight: 24,
+                                            color: "rgba(38, 45, 55, 0.7)",
+                                        }}
+                                    >
+                                        27km
+
+                                    </Text>
+                                    <Text
+                                        style={{
+                                            ...FONT.bold,
+                                            fontSize: 20,
+                                            lineHeight: 24,
+                                            color: "rgba(38, 45, 55, 0.7)",
+                                        }}
+                                    >
+                                        25 mins
+                                    </Text>
+
+                                </View>
+
+
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
             </BottomSheet >
@@ -351,89 +979,97 @@ const HomeScreen = (props: Props) => {
     );
 };
 
-
 type ActiveScootersProps = {
-    backgroundColorS?: string,
-}
+    backgroundColorS?: string;
+};
 
 const ActiveScooters = ({ backgroundColorS }: ActiveScootersProps) => {
-    return <View style={{
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: PADDING.medium,
-        width: '100%',
-        gap: PADDING.small,
-        backgroundColor: backgroundColorS,
-        borderRadius: 10,
-        borderWidth: 1,
-        borderColor: "rgba(30, 75, 138, 0.2)",
-        marginVertical: MARGIN.small,
-    }}>
-        <View style={{
-            width: '10%',
-        }}>
-            <AntDesign name="checkcircleo" size={24} color="#1E4B8A" />
-        </View>
+    return (
         <View
             style={{
-                width: '90%',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                padding: PADDING.medium,
+                width: "100%",
+                gap: PADDING.small,
+                backgroundColor: backgroundColorS,
+                borderRadius: 10,
+                borderWidth: 1,
+                borderColor: "rgba(30, 75, 138, 0.2)",
+                marginVertical: MARGIN.small,
             }}
         >
             <View
                 style={{
-                    flexDirection: 'column',
+                    width: "10%",
                 }}
             >
-                <Text
+                <AntDesign name="checkcircleo" size={24} color="#1E4B8A" />
+            </View>
+            <View
+                style={{
+                    width: "90%",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                }}
+            >
+                <View
                     style={{
-                        ...FONT.medium,
-                        fontSize: 16,
-                        lineHeight: 20,
-                        color: "#31363C",
+                        flexDirection: "column",
                     }}
                 >
-                    Ather 450X
-                </Text>
-                <View style={{
-                    flexDirection: 'row',
-                    marginTop: 5,
-                }}>
-                    <BatteryIcon percentage={80} />
                     <Text
                         style={{
-                            ...FONT.regular,
-                            fontSize: 12,
-                            lineHeight: 15,
-                            color: 'rgba(38, 45, 55, 0.8)',
+                            ...FONT.medium,
+                            fontSize: 16,
+                            lineHeight: 20,
+                            color: "#31363C",
                         }}
                     >
-                        80%
+                        Ather 450X
                     </Text>
-                    <Text
+                    <View
                         style={{
-                            ...FONT.regular,
-                            fontSize: 12,
-                            lineHeight: 15,
-                            color: 'rgba(38, 45, 55, 0.8)',
+                            flexDirection: "row",
+                            marginTop: 5,
                         }}
                     >
-                        61 Km
-                    </Text>
+                        <BatteryIcon percentage={80} />
+                        <Text
+                            style={{
+                                ...FONT.regular,
+                                fontSize: 12,
+                                lineHeight: 15,
+                                color: "rgba(38, 45, 55, 0.8)",
+                            }}
+                        >
+                            80%
+                        </Text>
+                        <Text
+                            style={{
+                                ...FONT.regular,
+                                fontSize: 12,
+                                lineHeight: 15,
+                                color: "rgba(38, 45, 55, 0.8)",
+                            }}
+                        >
+                            61 Km
+                        </Text>
+                    </View>
                 </View>
+                <View>
+                    <Image
+                        source={require("../../assets/images/scooter.png")}
+                        style={{ height: 60, width: 95, borderRadius: 10 }}
+                    />
+                </View>
+                {/* imge and info */}
             </View>
-            <View>
-                <Image source={require('../../assets/images/scooter.png')} style={{ height: 60, width: 95, borderRadius: 10 }} />
-            </View>
-            {/* imge and info */}
         </View>
-    </View>
-}
-
-
+    );
+};
 
 const HorizontalLine = () => {
     return (
@@ -450,8 +1086,7 @@ const HorizontalLine = () => {
             }}
         />
     );
-}
-
+};
 
 export default HomeScreen;
 
