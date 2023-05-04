@@ -11,6 +11,8 @@ export const PADDING = {
 export const MARGIN = {
     primary: 20,
     secondary: 40,
+    small: 10,
+    medium: 16,
 }
 export const SECTION: ViewStyle = {
     marginTop: 20,

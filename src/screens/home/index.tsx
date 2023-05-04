@@ -1,11 +1,13 @@
 import {
+    AntDesign,
     Entypo,
     Feather,
     FontAwesome5,
     Ionicons,
     MaterialCommunityIcons,
 } from "@expo/vector-icons";
-import React from "react";
+import { BottomSheet } from '@rneui/themed';
+import React, { useState } from "react";
 import {
     FlatList,
     Image,
@@ -15,6 +17,7 @@ import {
     TouchableOpacity,
     View
 } from "react-native";
+import BatteryIcon from "../../components/BatteryIcon";
 import Dot from "../../components/Dot";
 import { H4 } from "../../components/Typography";
 import { COLORS, FONT, MARGIN, PADDING, SECTION } from "../../utils/constants";
@@ -40,7 +43,21 @@ const MAPS_ITEMS = [
     },
 ];
 
+
+
 const HomeScreen = (props: Props) => {
+
+    const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(true)
+    const list = [
+        { title: 'List Item 1' },
+        { title: 'List Item 2' },
+        {
+            title: 'Cancel',
+            containerStyle: { backgroundColor: 'red' },
+            titleStyle: { color: 'white' },
+            onPress: () => setIsBottomSheetOpen(false),
+        },
+    ];
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -50,7 +67,7 @@ const HomeScreen = (props: Props) => {
                         height: "100%",
                     }}
                 >
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => setIsBottomSheetOpen(true)}>
                         <View
                             style={{
                                 flexDirection: "row",
@@ -220,17 +237,17 @@ const HomeScreen = (props: Props) => {
                             <Entypo name="battery" size={24} color={COLORS.secondary} />
                             <Text>69%</Text>
                         </TouchableOpacity>
-                        {/* image ./assets/image/asdf.png */}
-                        <Image
-                            source={require("../../assets/images/scooter.png")}
-                            style={{
-                                backgroundColor: "red",
-                                borderColor: 'red',
-                                borderWidth: 1,
-                                position: "absolute",
-                            }}
-                        />
 
+
+                    </View>
+                    <View
+                        style={{
+                            position: "absolute",
+                            bottom: -10,
+                            right: 0,
+                        }}
+                    >
+                        <Image source={require('../../assets/images/scooter.png')} style={{ height: 60+50, width: 95+70, borderRadius: 10 }} />
                     </View>
                 </View>
                 <View style={styles.useMaps}>
@@ -290,9 +307,151 @@ const HomeScreen = (props: Props) => {
                     </View>
                 </View>
             </ScrollView>
-        </View>
+            <BottomSheet modalProps={{}} isVisible={isBottomSheetOpen} onBackdropPress={
+                () => {
+                    setIsBottomSheetOpen(false)
+                }
+            }>
+                <View style={{
+                    backgroundColor: 'transparent',
+                    height: 330, flexDirection: 'column',
+                    alignItems: 'center',
+                }}>
+                    <HorizontalLine />
+                    <View style={{
+                        flexDirection: 'column',
+                        width: '100%',
+                        alignItems: 'center',
+                        marginTop: MARGIN.primary,
+                        backgroundColor: 'white',
+                        height: 270,
+                        borderRadius: 10,
+                        padding: PADDING.primary,
+                    }}>
+                        <View>
+                            <H4>
+                                Select Your Scooter
+                            </H4>
+                        </View>
+                        <ScrollView
+
+                            showsVerticalScrollIndicator={false}
+                            style={{
+                                width: '100%',
+                                marginTop: MARGIN.primary,
+                            }}>
+
+                            <ActiveScooters backgroundColorS={"rgba(30, 75, 138, 0.2)"} />
+                            <ActiveScooters backgroundColorS={"#ffffff"} />
+                        </ScrollView>
+                    </View>
+                </View>
+            </BottomSheet >
+        </View >
     );
 };
+
+
+type ActiveScootersProps = {
+    backgroundColorS?: string,
+}
+
+const ActiveScooters = ({ backgroundColorS }: ActiveScootersProps) => {
+    return <View style={{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: PADDING.medium,
+        width: '100%',
+        gap: PADDING.small,
+        backgroundColor: backgroundColorS,
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: "rgba(30, 75, 138, 0.2)",
+        marginVertical: MARGIN.small,
+    }}>
+        <View style={{
+            width: '10%',
+        }}>
+            <AntDesign name="checkcircleo" size={24} color="#1E4B8A" />
+        </View>
+        <View
+            style={{
+                width: '90%',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+            }}
+        >
+            <View
+                style={{
+                    flexDirection: 'column',
+                }}
+            >
+                <Text
+                    style={{
+                        ...FONT.medium,
+                        fontSize: 16,
+                        lineHeight: 20,
+                        color: "#31363C",
+                    }}
+                >
+                    Ather 450X
+                </Text>
+                <View style={{
+                    flexDirection: 'row',
+                    marginTop: 5,
+                }}>
+                    <BatteryIcon percentage={80} />
+                    <Text
+                        style={{
+                            ...FONT.regular,
+                            fontSize: 12,
+                            lineHeight: 15,
+                            color: 'rgba(38, 45, 55, 0.8)',
+                        }}
+                    >
+                        80%
+                    </Text>
+                    <Text
+                        style={{
+                            ...FONT.regular,
+                            fontSize: 12,
+                            lineHeight: 15,
+                            color: 'rgba(38, 45, 55, 0.8)',
+                        }}
+                    >
+                        61 Km
+                    </Text>
+                </View>
+            </View>
+            <View>
+                <Image source={require('../../assets/images/scooter.png')} style={{ height: 60, width: 95, borderRadius: 10 }} />
+            </View>
+            {/* imge and info */}
+        </View>
+    </View>
+}
+
+
+
+const HorizontalLine = () => {
+    return (
+        <View
+            style={{
+                borderColor: "#E5E5E5",
+                backgroundColor: "#E5E5E5",
+                borderWidth: 1,
+                height: 1,
+                width: 150,
+                paddingVertical: 5,
+                borderRadius: 10,
+                marginTop: MARGIN.primary,
+            }}
+        />
+    );
+}
+
 
 export default HomeScreen;
 
