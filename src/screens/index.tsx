@@ -7,8 +7,10 @@ import { COLORS } from "../utils/constants";
 import Maps from "./Maps/index";
 import Profile from "./Profile/index";
 import Settings from "./Profile/settings";
+import Booking from "./Service/booking";
 import Service from "./Service/index";
 import HomeScreen from "./home/index";
+import Scooter from "./home/scooter";
 
 
 type INITAIL_ROUTES_t = {
@@ -16,6 +18,8 @@ type INITAIL_ROUTES_t = {
     AuthStack: keyof AuthStackParams;
     BottomTab: keyof BottomTabParams;
     ProfileScreenStack: keyof ProfileScreenStackParams;
+    HomeScreenStack: keyof HomeScreenStackParams;
+    ServiceScreenStack: keyof ServiceScreenStackParams;
 };
 
 const INTITAIL_ROUTES: INITAIL_ROUTES_t = {
@@ -23,6 +27,8 @@ const INTITAIL_ROUTES: INITAIL_ROUTES_t = {
     AuthStack: "Login",
     BottomTab: "Home",
     ProfileScreenStack: "Profile",
+    HomeScreenStack: "Home",
+    ServiceScreenStack: "Service",
 };
 
 export type MainStackParams = {
@@ -40,6 +46,15 @@ export type BottomTabParams = {
     Service: undefined;
     Profile: undefined;
 };
+export type HomeScreenStackParams = {
+    Home: undefined;
+    Scooter: undefined;
+};
+export type ServiceScreenStackParams = {
+    Service: undefined;
+    Booking: undefined;
+};
+
 
 export type ProfileScreenStackParams = {
     Profile: undefined;
@@ -48,6 +63,7 @@ export type ProfileScreenStackParams = {
 
 const ProfileScreenStack =
     createNativeStackNavigator<ProfileScreenStackParams>();
+const HomeScreenStack = createNativeStackNavigator<HomeScreenStackParams>();
 
 const ProfileScreenStackScreen = () => {
     return (
@@ -66,6 +82,24 @@ const ProfileScreenStackScreen = () => {
 const MainStack = createNativeStackNavigator<MainStackParams>();
 const AuthStack = createNativeStackNavigator<AuthStackParams>();
 const BottomTab = createBottomTabNavigator<BottomTabParams>();
+const ServiceScreenStack =
+    createNativeStackNavigator<ServiceScreenStackParams>();
+
+const ServiceScreenStackScreen = () => {
+    return (
+        <ServiceScreenStack.Navigator
+            screenOptions={{
+                headerShown: false,
+            }}
+            initialRouteName={INTITAIL_ROUTES.ServiceScreenStack}
+
+        >
+
+            <ServiceScreenStack.Screen name="Service" component={Service} />
+            <ServiceScreenStack.Screen name="Booking" component={Booking} />
+        </ServiceScreenStack.Navigator>
+    );
+};
 
 export const MainStackScreen = () => {
     return (
@@ -80,6 +114,22 @@ export const MainStackScreen = () => {
     );
 };
 
+const HomeScreenStackScreen = () => {
+    return (
+        <HomeScreenStack.Navigator
+            screenOptions={{
+                headerShown: false,
+            }}
+            initialRouteName={INTITAIL_ROUTES.HomeScreenStack}
+        >
+
+            <HomeScreenStack.Screen name="Home" component={HomeScreen} />
+            <HomeScreenStack.Screen name="Scooter" component={Scooter} />
+        </HomeScreenStack.Navigator>
+    );
+};
+
+
 export const BottomTabScreen = () => {
     return (
         <BottomTab.Navigator
@@ -91,7 +141,7 @@ export const BottomTabScreen = () => {
         >
             <BottomTab.Screen
                 name="Home"
-                component={HomeScreen}
+                component={HomeScreenStackScreen}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="home-outline" size={size} color={color} />
@@ -109,7 +159,9 @@ export const BottomTabScreen = () => {
             />
             <BottomTab.Screen
                 name="Service"
-                component={Service}
+                component={
+                    ServiceScreenStackScreen
+                }
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <Feather name="tool" size={size} color={color} />

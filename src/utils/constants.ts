@@ -4,7 +4,7 @@ export const BUTTON_HEIGHT = 50;
 
 export const PADDING = {
     primary: 20,
-    secondary: 40,
+    secondary: 40   ,
     small: 10,
     medium: 16,
 }
@@ -70,6 +70,17 @@ export const FONT = {
     extraLightItalic: { fontFamily: FONT_FAMILY.extraLightItalic },
 };
 
+// const generateRandomColor = () => {
+//     return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+// }
+const generateColor = (salt) => {
+    const hue = (parseInt(salt, 16) % 360) / 360; // Use salt value to determine hue
+    const saturation = 0.6; // Set saturation to a constant value
+    const lightness = 0.5; // Set lightness to a constant value
+    const color = `hsl(${hue * 360}, ${saturation * 100}%, ${lightness * 100}%)`; // Combine values into HSL format
+    return color;
+};
+
 export const COLORS = {
     primary: "#262D37",
     secondary: "#262D3799",
@@ -80,7 +91,8 @@ export const COLORS = {
     tabBar: "rgba(38, 45, 55, 0.9)",
     tabBarActive: "#ffffff",
     tabBarInactive: "#8D99B0",
-    title: '#2C333D'
+    title: '#2C333D',
+    randomColors: generateColor,
 }
 
 export const flexaligncenter: ViewStyle = {
@@ -88,4 +100,3 @@ export const flexaligncenter: ViewStyle = {
     alignItems: "center",
     justifyContent: "center",
 }
-

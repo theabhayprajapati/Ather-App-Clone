@@ -56,7 +56,7 @@ const Scooter = (props: Props) => {
                         }}
                     >Last synced 1 min ago</Text>
                 </View>
-                <View
+                <TouchableOpacity
                     style={{
                         position: "absolute",
                         right: 0,
@@ -64,10 +64,10 @@ const Scooter = (props: Props) => {
 
                     }}
                 >
-                    <TouchableOpacity>
-                        <AntDesign name="close" size={24} color="black" />
-                    </TouchableOpacity>
-                </View>
+
+                    <AntDesign name="close" size={24} color="black" />
+
+                </TouchableOpacity>
             </View>
             <View
                 style={{
@@ -190,7 +190,7 @@ const Scooter = (props: Props) => {
                         </Text>
                     </View>
                 </View>
-                <View 
+                <View
                 >
                     {SERVICES.map((service) => (
                         <ServiceItem {...service} />

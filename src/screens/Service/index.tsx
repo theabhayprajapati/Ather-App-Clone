@@ -1,23 +1,27 @@
 import { AntDesign, Entypo, Ionicons, MaterialIcons } from '@expo/vector-icons'
+import { NavigationProp, useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ProfileScreenStackParams } from '..'
 import { COLORS, FONT, MARGIN, PADDING } from '../../utils/constants'
 import { hexWithOpacity } from '../../utils/helpers'
 
 type Props = {}
 
-type ServiceProps = {
+export type ServiceProps = {
   name: string;
   description: string;
   icon: React.ReactNode;
   iconName: string;
+  route?: string;
 }
-const SERVICES: ServiceProps[] = [
+export const SERVICES: ServiceProps[] = [
   {
     name: 'Get Support',
     description: 'Have any queries or quires?',
     icon: <AntDesign name="customerservice" size={24} color={hexWithOpacity(COLORS.blue, 100)} />,
     iconName: 'Contatct',
+    route: 'Booking'
   },
 
   {
@@ -25,20 +29,25 @@ const SERVICES: ServiceProps[] = [
     description: 'For on road assistance',
     icon: <MaterialIcons name="call" size={24} color={hexWithOpacity(COLORS.blue, 100)} />,
     iconName: '24x7',
+    route: 'Booking'
   },
   {
     name: 'Book Servicing',
     description: 'Book a slot for your  Vehicle service',
     icon: <Ionicons name="calendar" size={24} color={hexWithOpacity(COLORS.blue, 100)} />,
     iconName: 'Book now',
-
+    route: 'Booking'
   }
 ]
 
 
-const ServiceItem = ({ name, description, icon, iconName }: ServiceProps) => {
+export const ServiceItem = ({ name, description, icon, iconName, route }: ServiceProps) => {
+  const navigation = useNavigation<NavigationProp<ProfileScreenStackParams, 'Profile'>>();
+
   return (
-    <View style={ServiceStyles.container}>
+    <TouchableOpacity style={ServiceStyles.container}
+      onPress={() => navigation.navigate(route)}
+    >
       <View style={ServiceStyles.left}>
         <Text style={ServiceStyles.name}>
           {name}
@@ -55,7 +64,7 @@ const ServiceItem = ({ name, description, icon, iconName }: ServiceProps) => {
           {iconName}
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 

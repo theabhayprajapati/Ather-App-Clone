@@ -46,7 +46,7 @@ const MAPS_ITEMS = [
 
 const HomeScreen = (props: Props) => {
     const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
-    const [isBottomSheetOpen2, setIsBottomSheetOpen2] = useState(true);
+    const [isBottomSheetOpen2, setIsBottomSheetOpen2] = useState(false);
     const [isBottomSheetOpen3, setIsBottomSheetOpen3] = useState(false);
     return (
         <View style={styles.container}>
