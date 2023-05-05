@@ -28,6 +28,9 @@ jobs:
       - name: 🚀 Build app
         run: yarn apk
 
+      - name: Install jq 🧵
+        run: sudo apt-get update && sudo apt-get install -y jq && echo "Successfully Installed JQ"
+      
       - name: 🚀 Update Readme.md URL.
         run: |
           echo "::set-output name=apk_url::$(eas build:list --json --non-interactive | jq -r '.[0].artifacts.buildUrl"
